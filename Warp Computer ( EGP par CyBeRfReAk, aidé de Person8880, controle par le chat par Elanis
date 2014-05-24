@@ -1,0 +1,200 @@
+@name Warp computer
+@inputs EGP:wirelink User:entity
+@outputs Warp Destination:vector CursorPos:vector2
+@persist Buttons:array Buttons2:array Locations:array B:string
+    
+    #Warp computer, ideally to be used with sb_galaxies_beta6, contains warp locations to all planets and space locations
+    #Made by CyBeRfReAk, help from Person8880 , modified by Elanis
+
+#Chat
+runOnChat(1)
+
+if (chatClk(owner()))
+{
+B = lastSaid():lower()
+
+if(Warp==1){interval(1000) Warp=0}
+
+#Commandes Warp
+if (B=="warp terre")
+{
+    Destination=Locations[1,vector]
+    botSay("Warp Computer","ENTERPRISE",vec(0,150,0),"Destination Terre")
+}
+if (B=="warp shakuras")
+{
+    Destination=Locations[2,vector]
+    botSay("Warp Computer","ENTERPRISE",vec(0,150,0),"Destination Shakuras !")
+}
+if (B=="warp desert")
+{
+    Destination=Locations[3,vector]
+    botSay("Warp Computer","ENTERPRISE",vec(0,150,0),"Destination Desert !")
+}
+if (B=="warp hiigara")
+{
+    Destination=Locations[4,vector]
+    botSay("Warp Computer","ENTERPRISE",vec(0,150,0),"Destination Hiigara !")
+}
+if (B=="warp lave")
+{
+    Destination=Locations[5,vector]
+    botSay("Warp Computer","ENTERPRISE",vec(0,150,0),"Destination Lava !")
+}
+if (B=="orbite terre") {
+    Destination=Locations[6,vector]
+    botSay("Warp Computer","ENTERPRISE",vec(0,150,0),"Destination Earth Orbital !")
+}
+if (B=="orbite shakuras") {
+    Destination=Locations[7,vector]
+    botSay("Warp Computer","ENTERPRISE",vec(0,150,0),"Destination Shakuras Orbital !")
+}
+if (B=="warp universe")
+{
+    Destination=Locations[8,vector]
+    botSay("Warp Computer","ENTERPRISE",vec(0,150,0),"Destination Universe ! ")
+}
+if (B=="station spatiale")
+{
+    Destination=Locations[9,vector]
+    botSay("Warp Computer","ENTERPRISE",vec(0,150,0),"Destination vers Station Spatiale  ")
+}
+if (B=="teleportation")
+{
+    botSay("Warp Computer","ENTERPRISE",vec(0,150,0),"Ouverture d'une fenetre hyperspatiale !")
+    Warp=1
+}
+}
+
+
+    
+interval(100)
+
+if(first() | (~EGP & ->EGP))
+{
+    Buttons[1,vector2] = vec2(10,100)
+    Buttons[2,vector2] = vec2(110,100)
+    Buttons[3,vector2] = vec2(210,100)
+    Buttons[4,vector2] = vec2(310,100)
+    Buttons[5,vector2] = vec2(410,100)
+    Buttons[6,vector2] = vec2(15,195)
+    Buttons[7,vector2] = vec2(180,195)
+    Buttons[8,vector2] = vec2(345,195)
+    Buttons[9,vector2] = vec2(131,270)
+    
+    Buttons2[1,vector2] = vec2(100,140)
+    Buttons2[2,vector2] = vec2(200,140)
+    Buttons2[3,vector2] = vec2(300,140)
+    Buttons2[4,vector2] = vec2(400,140)
+    Buttons2[5,vector2] = vec2(500,140)
+    Buttons2[6,vector2] = vec2(165,245)
+    Buttons2[7,vector2] = vec2(330,245)
+    Buttons2[8,vector2] = vec2(495,245)
+    Buttons2[9,vector2] = vec2(381,360)
+     
+    Locations[1,vector] = vec(-891.812,8202.625,11397.25)     #Earth
+    Locations[2,vector] = vec(-9722.469,-8687.125,7287.281)    #Shakuras
+    Locations[3,vector] = vec(10813.469,-9631.781,-7541.219)   #Desert Planet 
+    Locations[4,vector] = vec(7144.75,9267.938,-4660.031)  #Hiigara
+    Locations[5,vector] = vec(-9891.5,167.563,-3283.75)  #Lava Planet
+    Locations[6,vector] = vec(-7659.344,7215.219,7300.563)    #Milky Way
+    Locations[7,vector] = vec(1703.844,-8593.844,8143.375)   #Pegasus
+    Locations[8,vector] = vec(111.344,-2874.812,-2954.719)   #Universe
+    Locations[9,vector] = vec(5884.438,-6916.156,8780.438)  #Space Station
+    
+    EGP:egpBox(300,vec2(0,0),vec2(0,0))
+    
+    EGP:egpBox(1,vec2(55,120),vec2(90,40))  #Planets boxes
+    EGP:egpBox(2,vec2(155,120),vec2(90,40))   #
+    EGP:egpBox(3,vec2(255,120),vec2(90,40))   #
+    EGP:egpBox(4,vec2(355,120),vec2(90,40))   #
+    EGP:egpBox(5,vec2(455,120),vec2(90,40))   #
+    EGP:egpBox(6,vec2(90,220),vec2(150,50))   #Space Locations boxes
+    EGP:egpBox(7,vec2(255,220),vec2(150,50))    #
+    EGP:egpBox(8,vec2(420,220),vec2(150,50))    #
+    EGP:egpRoundedBox(9,vec2(256,315),vec2(250,90))   #Space Station box
+    EGP:egpRoundedBox(10,vec2(256,430),vec2(480,80))    #WARP box
+    
+    EGP:egpBox(296,vec2(256,15),vec2(512,70)) #Warp Computer text background
+    EGP:egpColor(296,176,23,31,255)
+    
+    EGP:egpText(286,"Universe",vec2(368,203))
+    EGP:egpFont(286,"Times New Roman",34)
+    EGP:egpColor(286,0,0,238,255)
+    
+    EGP:egpText(287,"Pegasus",vec2(207,203))
+    EGP:egpFont(287,"Times New Roman",34)
+    EGP:egpColor(287,0,0,238,255)
+    
+    EGP:egpText(288,"Milky Way",vec2(28,203))
+    EGP:egpFont(288,"Times New Roman",30)
+    EGP:egpColor(288,0,0,238,255)
+    
+    EGP:egpText(289,"Lava",vec2(425,103))
+    EGP:egpFont(289,"Times New Roman",30)
+    EGP:egpColor(289,176,23,31,255)
+    
+    EGP:egpText(290,"Hiigara",vec2(314,106))
+    EGP:egpFont(290,"Times New Roman",28)
+    EGP:egpColor(290,65,105,225,255)
+    
+    EGP:egpText(291,"Desert",vec2(220,104))
+    EGP:egpFont(291,"Times New Roman",30)
+    EGP:egpColor(291,65,105,225,255)
+    
+    EGP:egpText(292,"Shakuras",vec2(114,107))
+    EGP:egpFont(292,"Times New Roman",24)
+    EGP:egpColor(292,65,105,225,255)
+    
+    EGP:egpText(293,"Earth",vec2(23,103))
+    EGP:egpFont(293,"Times New Roman",30)
+    EGP:egpColor(293,65,105,225,255)
+    
+    EGP:egpText(294,"WARP",vec2(170,395))
+    EGP:egpFont(294,"Times New Roman",70)
+    EGP:egpColor(294,30,30,30,255)
+    
+    EGP:egpText(295,"Space Station",vec2(180,297))
+    EGP:egpFont(295,"Times New Roman",30)
+    EGP:egpColor(295,16,78,139,255)
+    
+    EGP:egpText(297,"Space Locations",vec2(165,150))
+    EGP:egpFont(297,"Times New Roman",30)
+    
+    EGP:egpText(298,"Planets",vec2(212,55))
+    EGP:egpFont(298,"Times New Roman",30)
+    
+    EGP:egpText(299,"Warp Computer",vec2(170,10))
+    EGP:egpFont(299,"Times New Roman",30)
+    EGP:egpColor(299,0,255,0,255)
+}
+ 
+CursorPos = EGP:egpCursor(owner())
+EGP:egpPos(300,CursorPos)
+ 
+if(owner():keyUse() & User:isValid())
+{
+    for(I=1,9)
+    {
+        if(inrange( CursorPos, Buttons[I,vector2], Buttons2[I,vector2]))
+        {
+            EGP:egpColor(I,vec(0,255,0))
+            Destination = Locations[I,vector]
+        }
+        else
+        {
+            EGP:egpColor(I,vec(139,131,134))
+        }
+    }
+}
+if(inrange(CursorPos,vec2(16,390),vec2(496,470)) & (owner():keyUse() & User:isValid())) 
+{
+    Warp = 1
+    EGP:egpColor(10,vec(0,238,118))
+    timer("Blink",600)
+}
+if(clk("Blink")) 
+{
+    EGP:egpColor(10,vec(132,112,255))
+    Warp = 0
+}
