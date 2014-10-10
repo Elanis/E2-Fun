@@ -1,0 +1,24 @@
+@name Anti-Duplication
+@inputs 
+@outputs E:entity O:entity 
+@persist 
+@trigger 
+@model models/Iziraider/disabler/disabler.mdl
+
+#J'ai mis un petit modele sympa après a vous de choisir de le garder ou non ^^
+
+############################################################
+########################## Par Elanis ######################
+################### https://github.com/Elanis ##############
+############################################################
+
+#Pour qu'il soit actif pensez bien a le weld a la structure ou a l'objet que vous souhaitez proteger.
+
+
+E=entity()
+O=entity():owner()
+
+if(O:steamID()!="STEAM_0:0:########") #N'oubliez pas de mettre votre steam ID !!!
+{
+selfDestructAll()
+}
