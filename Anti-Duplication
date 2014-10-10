@@ -20,5 +20,8 @@ O=entity():owner()
 
 if(O:steamID()!="STEAM_0:0:########") #N'oubliez pas de mettre votre steam ID !!!
 {
+print("ALERTE DUPLICATION , AUTO-DESTRUCTION")
+Boom = propSpawn("models/props_junk/gascan001a.mdl",entity():pos(),entity():angles(),1)
+Boom:propBreak()
 selfDestructAll()
 }
