@@ -1,0 +1,147 @@
+@name Destiny Dock
+@inputs Destiny:entity GateSeeder:entity Dock
+@outputs Docked Gpos:vector Dpos:vector
+@persist 
+@trigger 
+
+############################################################
+########################## Par Elanis ######################
+################### https://github.com/Elanis ##############
+############################################################
+
+interval(1)
+
+if(first())
+{   
+Docked=0
+}
+
+if(Dock)
+{
+if(Docked==6) { Docked=7 }
+if(Docked==0) { Docked=1 }
+}
+
+if(Docked==1)
+{
+    Gpos = GateSeeder:pos()
+    Dpos = Destiny:pos()
+
+    #On freeze
+    Destiny:propFreeze(1)
+    GateSeeder:propFreeze(1)
+    
+    #On les mets droits a vec le meme angle
+    Destiny:setAng(ang(0,0,0))
+    GateSeeder:setAng(ang(0,0,0))
+    
+    #On set les cotes
+    if(Gpos:y()>Dpos:y())
+    {
+    if(Gpos:z()>Dpos:z()-115)
+    {
+    GateSeeder:setPos(Gpos-vec(0,1,1))
+    }
+    
+    if(Gpos:z()<Dpos:z()-115)
+    {
+    GateSeeder:setPos(Gpos+vec(0,-1,1))
+    }
+    }
+    
+    if(Gpos:y()<Dpos:y())
+    {
+    if(Gpos:z()>Dpos:z()-115)
+    {
+    GateSeeder:setPos(Gpos-vec(0,-1,1))
+    }
+    
+    if(Gpos:z()<Dpos:z()-115)
+    {
+    GateSeeder:setPos(Gpos+vec(0,1,1))
+    }
+    }
+    
+    if(Gpos:y()<Dpos:y()&Gpos:y()+1>Dpos:y()&Gpos:y()!=Dpos:y()) { GateSeeder:setPos(vec(Gpos:x(),Dpos:y(),Gpos:z())) Docked=2 }
+    
+    if(Gpos:z()<Dpos:z()-115&Gpos:z()+1>Dpos:z()-115&Gpos:z()!=Dpos:z()-115) { GateSeeder:setPos(vec(Gpos:x(),Gpos:y(),Dpos:z()-115)) Docked=3 }
+
+}
+
+if(Docked==2)
+{
+    Gpos = GateSeeder:pos()
+    Dpos = Destiny:pos()
+    
+    if(Gpos:z()>Dpos:z()-115)
+    {
+    GateSeeder:setPos(Gpos-vec(0,0,1))
+    }
+    
+    if(Gpos:z()<Dpos:z()-115)
+    {
+    GateSeeder:setPos(Gpos+vec(0,0,1))
+    }
+    
+    if(Gpos:z()<Dpos:z()-115&Gpos:z()+1>Dpos:z()-115&Gpos:z()!=Dpos:z()-115) { GateSeeder:setPos(vec(Gpos:x(),Gpos:y(),Dpos:z()-115)) Docked=4 }
+   
+}
+
+if(Docked==3)
+{
+    Gpos = GateSeeder:pos()
+    Dpos = Destiny:pos()
+    
+    if(Gpos:y()>Dpos:y())
+    {
+    GateSeeder:setPos(Gpos-vec(0,1,0))
+    }
+    
+    if(Gpos:y()<Dpos:y())
+    {
+    GateSeeder:setPos(Gpos+vec(0,1,0))
+    }
+    
+    if(Gpos:y()<Dpos:y()&Gpos:y()+1>Dpos:y()&Gpos:y()!=Dpos:y()) { GateSeeder:setPos(vec(Gpos:x(),Dpos:y(),Gpos:z())) Docked=4 }
+    
+}
+
+if(Docked==4)
+{
+    Gpos = GateSeeder:pos()
+    Dpos = Destiny:pos()
+    
+    #On fait la sequence de dock avec l'axe x
+    if(Gpos:x()>Dpos:x()+530)
+    {
+    GateSeeder:setPos(Gpos-vec(1,0,0))
+    }
+    
+    if(Gpos:x()<Dpos:x()+530)
+    {
+    GateSeeder:setPos(Gpos+vec(1,0,0))
+    }
+    
+    if(Gpos:x()<Dpos:x()+530&Gpos:x()+1>Dpos:x()+530&Gpos:x()!=Dpos:x()+530) { GateSeeder:setPos(vec(Dpos:x()+530,Gpos:y(),Gpos:z())) Docked=5 }
+
+}
+
+if(Docked==5)
+{
+    Destiny:weldTo(GateSeeder,1)
+    Destiny:noCollide(GateSeeder)
+    Destiny:propFreeze(0)
+    GateSeeder:propFreeze(0)
+    Docked=6
+}
+
+if(Docked==7)
+{
+    Destiny:constraintBreak(GateSeeder)
+    timer("time",1000)
+}
+
+if(clk("time"))
+{
+    Docked=0
+}
