@@ -1,0 +1,17 @@
+@name Son
+@inputs 
+@outputs 
+@persist 
+@trigger 
+
+############################################################
+########################## Par Elanis ######################
+################### https://github.com/Elanis ##############
+############################################################
+
+#Charger un son distant au demarrage grâce a une fonction intégrée a l'E2 Power 
+
+if(first())
+{
+soundURLload(1,"http://www.website.com/file.mp3",100,0,entity())
+}
