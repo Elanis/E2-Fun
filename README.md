@@ -1,6 +1,14 @@
 E2-Fun
 ======
 
-Quelques E2 que j'ai crée pour le fun.
+Quelques scripts funs pour E2 dans le wiremod de Garry's Mod.
 
-Ces E2 sont openSources a la condition de toujours laisser mon pseudo visible dans ces E2 ainsi que le lien de mon github.
+Some fun scripts for Wiremod E2 in Garry's Mod.
+
+======
+
+Licence:
+
+You can use and share this scripts freely while keeping my name & github in files.
+
+Vous pouvez utiliser et partager librement ces scripts à condition de laisser mon nom et mon github dans ces fichiers.
